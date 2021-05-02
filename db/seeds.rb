@@ -7,5 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 10.times do |i|
-    Post.create(title: "Post #{i+1}", body: Faker::Lorem.paragraph(sentence_count: 500))
+  post = Post.create!(title: "Post #{i+1}", body: Faker::Lorem.paragraph(sentence_count: 500))
+  20.times do |j|
+    Comment.create!(author: Faker::Name.name, post: post, content: Faker::Lorem.paragraph(sentence_count: 3))
+  end
 end

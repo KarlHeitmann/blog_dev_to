@@ -3,6 +3,14 @@
   <article data-controller="infinite-scroll" data-infinite-scroll-path-value="<%= post_path(@post) %>" data-infinite-scroll-target="entry">
     <h2><%= @post.title %></h2>
     <p><%= @post.body %></p>
+    <% @post.comments.each do |comment| %>
+      <small>
+        <ul>
+          <li><%= comment.author %></li>
+          <li><%= comment.content %></li>
+        </ul>
+      </small>
+    <% end %>
     <%= link_to 'Edit', edit_post_path(@post), data: { turbo_frame: "_top" } %> |
     <%= link_to 'Back', posts_path, data: { turbo_frame: "_top" }  %>
   </article>
