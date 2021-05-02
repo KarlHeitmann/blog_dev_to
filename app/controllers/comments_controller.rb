@@ -10,6 +10,21 @@ class CommentsController < ApplicationController
   def show
   end
 
+  def touch
+
+    @comment = Comment.find params[:id]
+    @post = @comment.post
+    PostChannel.broadcast_to @post, @comment
+    render json: {}
+    # @room = Room.find params.dig(:room_message, :room_id)
+    # @room_message = RoomMessage.create user: current_user,
+    #                                 room: @room,
+    #                                 message: params.dig(:room_message, :message)
+    # RoomChannel.broadcast_to @room, @room_message
+
+
+  end
+
   # GET /comments/new
   def new
     @comment = Comment.new
